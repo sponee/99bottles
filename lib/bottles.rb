@@ -24,8 +24,7 @@ class Bottles
   end
 
   def action(number)
-    case number
-    when 0
+    if number == 0
       "Go to the store and buy some more, "
     else
       "Take #{pronoun(number)} down and pass it around, "
@@ -41,8 +40,7 @@ class Bottles
   end
 
   def container(number)
-    case number
-    when 1
+    if number == 1
       "bottle"
     else
       "bottles"
