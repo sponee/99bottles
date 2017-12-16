@@ -18,12 +18,12 @@ class Bottles
     when 1
       "#{number} #{container(number)} of beer on the wall, " +
       "#{number} #{container(number)} of beer.\n" +
-      "Take it down and pass it around, " +
+      "Take #{pronoun(number)} down and pass it around, " +
       "no more #{container(number - 1)} of beer on the wall.\n"
     else
       "#{number} #{container(number)} of beer on the wall, " +
       "#{number} #{container(number)} of beer.\n" +
-      "Take one down and pass it around, " +
+      "Take #{pronoun(number)} down and pass it around, " +
       "#{number-1} #{container(number - 1)} of beer on the wall.\n"
     end
   end
@@ -34,6 +34,15 @@ class Bottles
       "bottle"
     else
       "bottles"
+    end
+  end
+
+  def pronoun(number)
+    case number
+    when 1
+      "it"
+    else
+      "one"
     end
   end
 end
