@@ -48,8 +48,7 @@ class Bottles
   end
 
   def pronoun(number)
-    case number
-    when 1
+    if number == 1
       "it"
     else
       "one"
