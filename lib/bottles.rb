@@ -1,60 +1,57 @@
-require 'pry'
 class Bottles
 
-  def verse(starting_bottles_count)
-    verse = print_first_verse_line(starting_bottles_count)
-    starting_bottles_count -= 1
-    verse += print_second_verse_line(starting_bottles_count)
-    return verse
-  end
-
-  def verses(starting_bottles_count, ending_bottles_count)
-    verses = ""
-    while starting_bottles_count > ending_bottles_count - 1
-      verses += verse(starting_bottles_count)
-      verses += "\n" if starting_bottles_count > ending_bottles_count
-      starting_bottles_count -= 1
-    end
-    return verses
-  end
-
   def song
-    return verses(99, 0)
+    verses(99, 0)
   end
 
-  private
+  def verses(starting, ending)
+    starting.downto(ending).map {|i| verse(i)}.join("\n")
+  end
 
-  def pluralize_bottle(bottles_count)
-    if bottles_count == 1
-      return "#{(bottles_count)} bottle"
-    elsif bottles_count == 0
-      return "no more bottles"
+  def verse(number)
+    "#{quantity(number).capitalize} #{container(number)} of beer on the wall, " +
+    "#{quantity(number)} #{container(number)} of beer.\n" +
+    "#{action(number)}" +
+    "#{quantity(successor(number))} #{container(successor(number))} of beer on the wall.\n"
+  end
+
+  def successor(number)
+    if number == 0
+      99
     else
-      return "#{(bottles_count)} bottles"
+      number - 1
     end
   end
 
-  def singularize_take(bottles_count)
-    if bottles_count == 0
-      return "Take it"
+  def action(number)
+    if number == 0
+      "Go to the store and buy some more, "
     else
-      return "Take one"
+      "Take #{pronoun(number)} down and pass it around, "
     end
   end
 
-  def print_first_verse_line(bottles_count)
-    if bottles_count > 0
-      return "#{pluralize_bottle(bottles_count)} of beer on the wall, #{pluralize_bottle(bottles_count)} of beer.\n"
+  def quantity(number)
+    if number == 0
+      "no more"
     else
-      return "No more bottles of beer on the wall, no more bottles of beer.\n"
+      number.to_s
     end
   end
 
-  def print_second_verse_line(bottles_count)
-    if bottles_count > -1
-      return "#{singularize_take(bottles_count)} down and pass it around, #{pluralize_bottle(bottles_count)} of beer on the wall.\n"
+  def container(number)
+    if number == 1
+      "bottle"
     else
-      return "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
+      "bottles"
+    end
+  end
+
+  def pronoun(number)
+    if number == 1
+      "it"
+    else
+      "one"
     end
   end
 end
