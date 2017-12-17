@@ -2,7 +2,7 @@ require 'pry'
 class OriginalBottles
 
   def verse(starting_bottles_count)
-    verse = print_first_verse_line(starting_bottles_count) + print_second_verse_line(starting_bottles_count -= 1)
+    verse = print_first_verse_line(starting_bottles_count) + print_second_verse_line(starting_bottles_count - 1)
     return verse
   end
 
@@ -21,6 +21,8 @@ class OriginalBottles
       return "#{(bottles_count)} bottle"
     elsif bottles_count == 0
       return "no more bottles"
+    elsif bottles_count == 6
+      return "1 six-pack"
     else
       return "#{(bottles_count)} bottles"
     end
@@ -43,10 +45,10 @@ class OriginalBottles
   end
 
   def print_second_verse_line(bottles_count)
-    if bottles_count > -1
-      return "#{singularize_take(bottles_count)} down and pass it around, #{pluralize_bottle(bottles_count)} of beer on the wall.\n"
-    else
+    if bottles_count == -1
       return "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
+    else
+      return "#{singularize_take(bottles_count)} down and pass it around, #{pluralize_bottle(bottles_count)} of beer on the wall.\n"
     end
   end
 end
