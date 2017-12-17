@@ -21,7 +21,7 @@ class OriginalBottles
   end
 
   def singularize_take(bottles_count)
-    BottleNumber.new(bottles_count).singularize_take(bottles_count)
+    BottleNumber.new(bottles_count).singularize_take
   end
 
   def print_first_verse_line(bottles_count)
@@ -52,7 +52,7 @@ class BottleNumber
     end
   end
 
-  def singularize_take(bottles_count)
+  def singularize_take
     if @bottle_number == 0
       return "Take it"
     else
@@ -72,7 +72,7 @@ class BottleNumber
     if @bottle_number == -1
       return "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
     else
-      return "#{singularize_take(@bottle_number)} down and pass it around, #{pluralize_bottle} of beer on the wall.\n"
+      return "#{singularize_take} down and pass it around, #{pluralize_bottle} of beer on the wall.\n"
     end
   end
 end
