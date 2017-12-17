@@ -9,8 +9,8 @@ class Bottles
   end
 
   def verse(number)
-    bottle_number = BottleNumber.new(number)
-    successor_bottle_number = BottleNumber.new(bottle_number.successor)
+    bottle_number           = BottleNumber.new(number)
+    successor_bottle_number = bottle_number.successor
 
     "#{bottle_number.quantity.capitalize} #{bottle_number.container} of beer on the wall, " +
     "#{bottle_number.quantity} #{bottle_number.container} of beer.\n" +
@@ -48,9 +48,9 @@ class BottleNumber
 
   def successor
     if number == 0
-      99
+      BottleNumber.new(99)
     else
-      number - 1
+      BottleNumber.new(number - 1)
     end
   end
 
