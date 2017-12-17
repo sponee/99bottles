@@ -12,10 +12,10 @@ class Bottles
     bottle_number           = BottleNumber.new(number)
     successor_bottle_number = bottle_number.successor
 
-    "#{bottle_number.quantity.capitalize} #{bottle_number.container} of beer on the wall, " +
-    "#{bottle_number.quantity} #{bottle_number.container} of beer.\n" +
+    "#{bottle_number.to_s.capitalize} of beer on the wall, " +
+    "#{bottle_number.to_s} of beer.\n" +
     "#{bottle_number.action}" +
-    "#{bottle_number.successor.quantity} #{bottle_number.successor.container} of beer on the wall.\n"
+    "#{successor_bottle_number.to_s} of beer on the wall.\n"
   end
 end
 
@@ -64,5 +64,9 @@ class BottleNumber
     else
       "one"
     end
+  end
+
+  def to_s
+    "#{quantity} #{container}"
   end
 end
