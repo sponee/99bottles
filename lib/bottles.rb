@@ -21,6 +21,7 @@ class Bottles
     else
       number - 1
     end
+    BottleNumber.new(number).successor(number)
   end
 
   def action(number)
@@ -29,6 +30,7 @@ class Bottles
     else
       "Take #{pronoun(number)} down and pass it around, "
     end
+    BottleNumber.new(number).action(number)
   end
 
   def quantity(number)
@@ -37,6 +39,7 @@ class Bottles
     else
       number.to_s
     end
+    BottleNumber.new(number).quantity(number)
   end
 
   def container(number)
@@ -45,6 +48,7 @@ class Bottles
     else
       "bottles"
     end
+    BottleNumber.new(number).container(number)
   end
 
   def pronoun(number)
@@ -53,6 +57,7 @@ class Bottles
     else
       "one"
     end
+    BottleNumber.new(number).pronoun(number)
   end
 end
 
@@ -62,7 +67,7 @@ class BottleNumber
   def initialize(number)
     @number = number
   end
-  
+
   def successor(number)
     if number == 0
       99
