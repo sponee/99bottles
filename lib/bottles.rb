@@ -17,26 +17,6 @@ class Bottles
     "#{bottle_number.action}" +
     "#{bottle_number.successor.quantity} #{bottle_number.successor.container} of beer on the wall.\n"
   end
-
-  def successor(number)
-    BottleNumber.new(number).successor
-  end
-
-  def action(number)
-    BottleNumber.new(number).action
-  end
-
-  def quantity(number)
-    BottleNumber.new(number).quantity
-  end
-
-  def container(number)
-    BottleNumber.new(number).container
-  end
-
-  def pronoun(number)
-    BottleNumber.new(number).pronoun
-  end
 end
 
 class BottleNumber
