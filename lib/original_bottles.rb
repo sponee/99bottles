@@ -2,8 +2,8 @@ require 'pry'
 class OriginalBottles
 
   def verse(starting_bottles_count)
-    bottle_number = BottleNumber.new(starting_bottles_count)
-    second_bottle_number = BottleNumber.new(starting_bottles_count - 1)
+    bottle_number = BottleNumber.for(starting_bottles_count)
+    second_bottle_number = BottleNumber.for(starting_bottles_count - 1)
     return bottle_number.print_verse_line
   end
 
@@ -21,6 +21,15 @@ class BottleNumber
 
   def initialize(bottle_number)
     @bottle_number = bottle_number
+  end
+
+  def self.for(number)
+    case number
+    when 0
+      BottleNumber0.new(0)
+    else
+      BottleNumber.new(number)
+    end
   end
 
   def pluralize_bottle
@@ -64,12 +73,14 @@ class BottleNumber
   end
 
   def print_verse_line
-    if @bottle_number == 0
-      "No more bottles of beer on the wall, no more bottles of beer.\n" + 
-      "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
-    else
-      "#{pluralize_bottle} of beer on the wall, #{pluralize_bottle} of beer.\n" + 
-      "#{singularize_decremented_take} down and pass it around, #{pluralize_decremented_bottle} of beer on the wall.\n"
-    end
+    "#{pluralize_bottle} of beer on the wall, #{pluralize_bottle} of beer.\n" + 
+    "#{singularize_decremented_take} down and pass it around, #{pluralize_decremented_bottle} of beer on the wall.\n"
+  end
+end
+
+class BottleNumber0 < BottleNumber
+  def print_verse_line
+    "No more bottles of beer on the wall, no more bottles of beer.\n" + 
+    "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
   end
 end
