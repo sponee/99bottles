@@ -73,14 +73,18 @@ class BottleNumber
   end
 
   def print_verse_line
-    "#{pluralize_bottle} of beer on the wall, #{pluralize_bottle} of beer.\n" + 
+    "#{pluralize_bottle.capitalize} of beer on the wall, #{pluralize_bottle} of beer.\n" + 
     "#{singularize_decremented_take} down and pass it around, #{pluralize_decremented_bottle} of beer on the wall.\n"
   end
 end
 
 class BottleNumber0 < BottleNumber
+  def pluralize_bottle
+    "no more bottles"
+  end
+
   def print_verse_line
-    "No more bottles of beer on the wall, no more bottles of beer.\n" + 
+    "#{pluralize_bottle.capitalize} of beer on the wall, #{pluralize_bottle} of beer.\n" + 
     "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
   end
 end
