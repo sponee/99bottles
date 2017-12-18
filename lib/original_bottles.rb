@@ -67,7 +67,7 @@ class BottleNumber
   end
 
   def action
-    "#{singularize_decremented_take} down and pass it around, #{pluralize_decremented_bottle} of beer on the wall.\n"
+    "#{singularize_decremented_take} down and pass it around, #{pluralize_bottle(@bottle_number - 1)} of beer on the wall.\n"
   end
 
   def print_verse_line
