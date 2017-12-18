@@ -14,24 +14,6 @@ class OriginalBottles
   def song
     return verses(99, 0)
   end
-
-  private
-
-  def pluralize_bottle(bottles_count)
-    BottleNumber.new(bottles_count).pluralize_bottle
-  end
-
-  def singularize_take(bottles_count)
-    BottleNumber.new(bottles_count).singularize_take
-  end
-
-  def print_first_verse_line(bottles_count)
-    BottleNumber.new(bottles_count).print_first_verse_line
-  end
-
-  def print_second_verse_line(bottles_count)
-    BottleNumber.new(bottles_count).print_second_verse_line
-  end
 end
 
 class BottleNumber
