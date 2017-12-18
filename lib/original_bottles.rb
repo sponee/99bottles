@@ -3,7 +3,7 @@ class OriginalBottles
 
   def verse(starting_bottles_count)
     bottle_number = BottleNumber.for(starting_bottles_count)
-    return bottle_number.print_verse_line
+    bottle_number.print_verse_line
   end
 
   def verses(starting_bottles_count, ending_bottles_count)
@@ -11,7 +11,7 @@ class OriginalBottles
   end
 
   def song
-    return verses(99, 0)
+    verses(99, 0)
   end
 end
 
@@ -28,32 +28,23 @@ class BottleNumber
       BottleNumber0.new(0)
     when 1
       BottleNumber1.new(1)
+    when 6
+      BottleNumber6.new(6)
     else
       BottleNumber.new(number)
     end
   end
 
   def successor
-    case bottle_number
-    when 1
-      BottleNumber0.new(0)
-    when 2
-      BottleNumber1.new(1)
-    else
-      BottleNumber.new(bottle_number - 1)
-    end
+    BottleNumber.for(bottle_number - 1)
   end
 
   def pluralize_bottle
-    if bottle_number == 6
-      return "1 six-pack"
-    else
-      return "#{(@bottle_number)} bottles"
-    end
+    "#{(@bottle_number)} bottles"
   end
 
   def singularize_take
-    return "Take one"
+    "Take one"
   end
 
   def action
@@ -87,5 +78,11 @@ end
 class BottleNumber1 < BottleNumber
   def pluralize_bottle
     "#{(@bottle_number)} bottle"
+  end
+end
+
+class BottleNumber6 < BottleNumber
+  def pluralize_bottle
+    "1 six-pack"
   end
 end
