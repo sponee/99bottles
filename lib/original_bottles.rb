@@ -26,6 +26,8 @@ class BottleNumber
     case number
     when 0
       BottleNumber0.new(0)
+    when 1
+      BottleNumber1.new(1)
     else
       BottleNumber.new(number)
     end
@@ -35,28 +37,18 @@ class BottleNumber
     case bottle_number
     when 1
       BottleNumber0.new(0)
+    when 2
+      BottleNumber1.new(1)
     else
-      BottleNumber.new(bottle_number)
+      BottleNumber.new(bottle_number - 1)
     end
   end
 
-  def pluralize_bottle(bottle_number=@bottle_number)
-    if bottle_number == 1
-      return "#{(@bottle_number)} bottle"
-    elsif bottle_number == 6
+  def pluralize_bottle
+    if bottle_number == 6
       return "1 six-pack"
     else
       return "#{(@bottle_number)} bottles"
-    end
-  end
-
-  def pluralize_decremented_bottle
-    if bottle_number - 1 == 1
-      return "#{(@bottle_number - 1)} bottle"
-    elsif bottle_number - 1 == 6
-      return "1 six-pack"
-    elsif bottle_number > 1
-      return "#{(@bottle_number - 1)} bottles"
     end
   end
 
@@ -64,12 +56,8 @@ class BottleNumber
     return "Take one"
   end
 
-  def singularize_decremented_take
-    return "Take one"
-  end
-
   def action
-    "#{successor.singularize_take} down and pass it around, #{successor.pluralize_decremented_bottle} of beer on the wall.\n"
+    "#{successor.singularize_take} down and pass it around, #{successor.pluralize_bottle} of beer on the wall.\n"
   end
 
   def print_verse_line
@@ -87,15 +75,17 @@ class BottleNumber0 < BottleNumber
     "no more bottles"
   end
 
-  def pluralize_decremented_bottle
-    "no more bottles"
-  end
-
   def singularize_take
     "Take it"
   end
 
   def action
     "Go to the store and buy some more, #{successor.bottle_number} bottles of beer on the wall.\n"
+  end
+end
+
+class BottleNumber1 < BottleNumber
+  def pluralize_bottle
+    "#{(@bottle_number)} bottle"
   end
 end
