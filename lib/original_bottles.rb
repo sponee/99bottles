@@ -2,8 +2,8 @@ require 'pry'
 class OriginalBottles
 
   def verse(starting_bottles_count)
-    verse = print_first_verse_line(starting_bottles_count) + print_second_verse_line(starting_bottles_count -= 1)
-    return verse
+    bottle_number = BottleNumber.for(starting_bottles_count)
+    bottle_number.print_verse_line
   end
 
   def verses(starting_bottles_count, ending_bottles_count)
@@ -11,42 +11,78 @@ class OriginalBottles
   end
 
   def song
-    return verses(99, 0)
+    verses(99, 0)
+  end
+end
+
+class BottleNumber
+  attr_reader :bottle_number
+
+  def initialize(bottle_number)
+    @bottle_number = bottle_number
   end
 
-  private
-
-  def pluralize_bottle(bottles_count)
-    if bottles_count == 1
-      return "#{(bottles_count)} bottle"
-    elsif bottles_count == 0
-      return "no more bottles"
+  def self.for(number)
+    case number
+    when 0
+      BottleNumber0.new(0)
+    when 1
+      BottleNumber1.new(1)
+    when 6
+      BottleNumber6.new(6)
     else
-      return "#{(bottles_count)} bottles"
+      BottleNumber.new(number)
     end
   end
 
-  def singularize_take(bottles_count)
-    if bottles_count == 0
-      return "Take it"
-    else
-      return "Take one"
-    end
+  def successor
+    BottleNumber.for(bottle_number - 1)
   end
 
-  def print_first_verse_line(bottles_count)
-    if bottles_count > 0
-      return "#{pluralize_bottle(bottles_count)} of beer on the wall, #{pluralize_bottle(bottles_count)} of beer.\n"
-    else
-      return "No more bottles of beer on the wall, no more bottles of beer.\n"
-    end
+  def pluralize_bottle
+    "#{(@bottle_number)} bottles"
   end
 
-  def print_second_verse_line(bottles_count)
-    if bottles_count > -1
-      return "#{singularize_take(bottles_count)} down and pass it around, #{pluralize_bottle(bottles_count)} of beer on the wall.\n"
-    else
-      return "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
-    end
+  def singularize_take
+    "Take one"
+  end
+
+  def action
+    "#{successor.singularize_take} down and pass it around, #{successor.pluralize_bottle} of beer on the wall.\n"
+  end
+
+  def print_verse_line
+    "#{pluralize_bottle.capitalize} of beer on the wall, #{pluralize_bottle} of beer.\n" + 
+    "#{action}"
+  end
+end
+
+class BottleNumber0 < BottleNumber
+  def successor
+    BottleNumber.new(99)
+  end
+
+  def pluralize_bottle
+    "no more bottles"
+  end
+
+  def singularize_take
+    "Take it"
+  end
+
+  def action
+    "Go to the store and buy some more, #{successor.bottle_number} bottles of beer on the wall.\n"
+  end
+end
+
+class BottleNumber1 < BottleNumber
+  def pluralize_bottle
+    "#{(@bottle_number)} bottle"
+  end
+end
+
+class BottleNumber6 < BottleNumber
+  def pluralize_bottle
+    "1 six-pack"
   end
 end
