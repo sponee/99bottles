@@ -33,9 +33,7 @@ class BottleNumber
   end
 
   def pluralize_bottle
-    if bottle_number == 0
-      "no more bottles"
-    elsif bottle_number == 1
+    if bottle_number == 1
       return "#{(@bottle_number)} bottle"
     elsif bottle_number == 6
       return "1 six-pack"
@@ -72,9 +70,17 @@ class BottleNumber
     end
   end
 
+  def action
+    if @bottle_number == 0
+      "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
+    else
+      "#{singularize_decremented_take} down and pass it around, #{pluralize_decremented_bottle} of beer on the wall.\n"
+    end
+  end
+
   def print_verse_line
     "#{pluralize_bottle.capitalize} of beer on the wall, #{pluralize_bottle} of beer.\n" + 
-    "#{singularize_decremented_take} down and pass it around, #{pluralize_decremented_bottle} of beer on the wall.\n"
+    "#{action}"
   end
 end
 
@@ -83,8 +89,7 @@ class BottleNumber0 < BottleNumber
     "no more bottles"
   end
 
-  def print_verse_line
-    "#{pluralize_bottle.capitalize} of beer on the wall, #{pluralize_bottle} of beer.\n" + 
-    "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
+  def pluralize_decremented_bottle
+    "no more bottles"
   end
 end
