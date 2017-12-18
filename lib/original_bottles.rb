@@ -88,8 +88,4 @@ class BottleNumber0 < BottleNumber
   def pluralize_bottle
     "no more bottles"
   end
-
-  def pluralize_decremented_bottle
-    "no more bottles"
-  end
 end
