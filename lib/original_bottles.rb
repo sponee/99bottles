@@ -3,7 +3,6 @@ class OriginalBottles
 
   def verse(starting_bottles_count)
     bottle_number = BottleNumber.for(starting_bottles_count)
-    second_bottle_number = BottleNumber.for(starting_bottles_count - 1)
     return bottle_number.print_verse_line
   end
 
@@ -66,15 +65,11 @@ class BottleNumber
   end
 
   def singularize_decremented_take
-    if @bottle_number - 1 == 0
-      return "Take it"
-    else
-      return "Take one"
-    end
+    return "Take one"
   end
 
   def action
-    "#{singularize_decremented_take} down and pass it around, #{successor.pluralize_decremented_bottle} of beer on the wall.\n"
+    "#{successor.singularize_take} down and pass it around, #{successor.pluralize_decremented_bottle} of beer on the wall.\n"
   end
 
   def print_verse_line
