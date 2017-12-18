@@ -32,6 +32,15 @@ class BottleNumber
     end
   end
 
+  def successor
+    case bottle_number
+    when 1
+      BottleNumber0.new(0)
+    else
+      BottleNumber.new(bottle_number)
+    end
+  end
+
   def pluralize_bottle(bottle_number=@bottle_number)
     if bottle_number == 1
       return "#{(@bottle_number)} bottle"
@@ -43,13 +52,11 @@ class BottleNumber
   end
 
   def pluralize_decremented_bottle
-    if bottle_number - 1 == 0
-      "no more bottles"
-    elsif bottle_number - 1 == 1
+    if bottle_number - 1 == 1
       return "#{(@bottle_number - 1)} bottle"
     elsif bottle_number - 1 == 6
       return "1 six-pack"
-    else
+    elsif bottle_number > 1
       return "#{(@bottle_number - 1)} bottles"
     end
   end
@@ -67,7 +74,7 @@ class BottleNumber
   end
 
   def action
-    "#{singularize_decremented_take} down and pass it around, #{pluralize_bottle(@bottle_number - 1)} of beer on the wall.\n"
+    "#{singularize_decremented_take} down and pass it around, #{successor.pluralize_decremented_bottle} of beer on the wall.\n"
   end
 
   def print_verse_line
@@ -77,7 +84,15 @@ class BottleNumber
 end
 
 class BottleNumber0 < BottleNumber
+  def successor
+    BottleNumber.new(99)
+  end
+
   def pluralize_bottle
+    "no more bottles"
+  end
+
+  def pluralize_decremented_bottle
     "no more bottles"
   end
 
@@ -86,6 +101,6 @@ class BottleNumber0 < BottleNumber
   end
 
   def action
-    "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
+    "Go to the store and buy some more, #{successor.bottle_number} bottles of beer on the wall.\n"
   end
 end
